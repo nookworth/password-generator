@@ -1,12 +1,26 @@
 // Assignment Code
 var generateBtn = document.querySelector("#generate");
+var passwordLength;
+var specialChars;
 
 // Write password to the #password input
 function writePassword() {
-  var password = generatePassword();
+  passwordLength = charCount();
+  specialChars = specialChars();
+  var password = generatePassword(passwordLength, specialChars);
   var passwordText = document.querySelector("#password");
 
   passwordText.value = password;
+}
+
+function generatePassword(length, choices) {
+  var result = "";
+  var characters = choices;
+  var charactersLength = characters.length;
+  for (var i = 0; i < length; i++) {
+    result += characters.charAt(Math.floor(Math.random() * charactersLength));
+  }
+  return result;
 }
 
 //keep track of the number of characters the user wants
@@ -25,13 +39,15 @@ function charCount() {
   return pwdLen;
 }
 
+//keep track of user's choices for which special characters to include
 function specialChars() {
   var charChoices = "";
   var typeCount = 0;
 
   if (window.confirm("Would you like lowercase letters?")) {
     window.alert("Your password will include lowercase characters.");
-    charChoices.concat("abcdefghijklmnopqrstuvwxyz");
+    charChoices += "abcdefghijklmnopqrstuvwxyz";
+    console.log(charChoices);
     typeCount += 1;
   } else {
     window.alert("Your password will not include lowercase characters.");
@@ -39,7 +55,7 @@ function specialChars() {
 
   if (window.confirm("Would you like uppercase letters?")) {
     window.alert("Your password will include uppercase characters.");
-    charChoices.concat("ABCDEFGHIJKLMNOPQRSTUVWXYZ");
+    charChoices += "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
     typeCount += 1;
   } else {
     window.alert("Your password will not include uppercase characters.");
@@ -47,7 +63,7 @@ function specialChars() {
 
   if (window.confirm("Would you like numeric letters?")) {
     window.alert("Your password will include numeric characters.");
-    charChoices.concat("1234567890");
+    charChoices += "1234567890";
     typeCount += 1;
   } else {
     window.alert("Your password will not include numeric characters.");
@@ -55,7 +71,7 @@ function specialChars() {
 
   if (window.confirm("Would you like special letters?")) {
     window.alert("Your password will include special characters.");
-    charChoices.concat("!@#$%^&*()");
+    charChoices += "!@#$%^&*()";
     typeCount += 1;
   } else {
     window.alert("Your password will not include special characters.");
@@ -69,29 +85,5 @@ function specialChars() {
   }
   return charChoices;
 }
-
-function generatePassword(length, choices) {
-  var result = "";
-  var characters = choices;
-  var charactersLength = characters.length;
-  for (var i = 0; i < length; i++) {
-    result += characters.charAt(Math.floor(Math.random() * charactersLength));
-  }
-  return result;
-}
-
-function makeid(length) {
-  var result = "";
-  var characters =
-    "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
-  var charactersLength = characters.length;
-  for (var i = 0; i < length; i++) {
-    result += characters.charAt(Math.floor(Math.random() * charactersLength));
-  }
-  return result;
-}
-
 // Add event listener to generate button
 generateBtn.addEventListener("click", writePassword);
-generateBtn.addEventListener("click", charCount);
-generateBtn.addEventListener("click", specialChars);
