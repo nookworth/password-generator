@@ -1,5 +1,7 @@
 // Assignment Code
 var generateBtn = document.querySelector("#generate");
+
+//define variables which will later be used in functions
 var passwordLength;
 var specialChars;
 
@@ -13,6 +15,7 @@ function writePassword() {
   passwordText.value = password;
 }
 
+// randomly generate a password according to the user's choice of password length and special characters
 function generatePassword(length, choices) {
   var result = "";
   var characters = choices;
@@ -23,7 +26,7 @@ function generatePassword(length, choices) {
   return result;
 }
 
-//keep track of the number of characters the user wants
+//log the number of characters the user wants and ask again if they select a number less than 8 or more than 128
 function charCount() {
   var retry = true;
   while (retry === true) {
@@ -39,7 +42,7 @@ function charCount() {
   return pwdLen;
 }
 
-//keep track of user's choices for which special characters to include
+//keep track of user's choices for which special characters to include and if they choose none, make their password out of all special characters
 function specialChars() {
   var charChoices = "";
   var typeCount = 0;
@@ -47,7 +50,6 @@ function specialChars() {
   if (window.confirm("Would you like lowercase letters?")) {
     window.alert("Your password will include lowercase characters.");
     charChoices += "abcdefghijklmnopqrstuvwxyz";
-    console.log(charChoices);
     typeCount += 1;
   } else {
     window.alert("Your password will not include lowercase characters.");
@@ -81,7 +83,7 @@ function specialChars() {
     window.alert(
       "You chose 0 character types. Your password will be all special characters."
     );
-    charChoices.concat("!@#$%^&*()");
+    charChoices += "!@#$%^&*()";
   }
   return charChoices;
 }
