@@ -81,9 +81,10 @@ function specialChars() {
 
   if (typeCount === 0) {
     window.alert(
-      "You chose 0 character types. Your password will be all special characters."
+      "You chose 0 character types. Your password will include all character types."
     );
-    charChoices += "!@#$%^&*()";
+    charChoices +=
+      "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890!@#$%^&*()";
   }
   return charChoices;
 }
